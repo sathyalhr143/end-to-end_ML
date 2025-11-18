@@ -1,11 +1,9 @@
 import logging
 import os
-import sys
 from datetime import datetime
-import exception
 
 LOG_FILE=f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
-logs_path=os.path.join(os.getcwd(),"logs",LOG_FILE)
+logs_path=os.path.join(os.getcwd(),"logs")
 os.makedirs(logs_path,exist_ok=True)
 
 LOG_FILE_PATH=os.path.join(logs_path,LOG_FILE)
@@ -17,6 +15,8 @@ logging.basicConfig(
                     )
 logger = logging.getLogger(__name__)
 
+#test logging
+logging.info("Logging is set up.")
 
 # if __name__ == "__main__":
 #     try:

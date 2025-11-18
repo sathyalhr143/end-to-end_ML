@@ -1,14 +1,8 @@
 import sys
-import logging
+from logger import logging
 
-def handle_exception(exc_type, exc_value, exc_traceback):
-    """Custom exception handler that prints exceptions in a readable format."""
-    if issubclass(exc_type, KeyboardInterrupt):
-        sys.__excepthook__(exc_type, exc_value, exc_traceback)
-        return
-    print("Uncaught exception:", exc_value)
-    
-    
+
+
 def error_message_detail(error, error_detail: sys):
     """Generates a detailed error message including file name and line number."""
     _, _, exc_tb = error_detail.exc_info()
@@ -26,10 +20,10 @@ class CustomException(Exception):
         return self.error_message   
     
     
-# if __name__ == "__main__":
+if __name__ == "__main__":
     
-#     try:
-#         a = 1 / 0
-#     except Exception as e:
-#         logging.info("Exception occurred")
-#         raise CustomException(e, sys)
+    try:
+        a = 1 / 0
+    except Exception as e:
+        logging.info("Divide by zero exception occurred")
+        raise CustomException(e, sys)
