@@ -3,5 +3,9 @@ numpy
 matplotlib
 scikit-learn
 seaborn
+ipython
+catboost
+xgboost
+# ipwidgets
 #pytorch
--e .
+# -e .
