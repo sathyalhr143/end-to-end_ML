@@ -1,5 +1,5 @@
 import sys
-from logger import logging
+from src.logger import logging
 
 
 
@@ -20,10 +20,10 @@ class CustomException(Exception):
         return self.error_message   
     
     
-if __name__ == "__main__":
+# if __name__ == "__main__":
     
-    try:
-        a = 1 / 0
-    except Exception as e:
-        logging.info("Divide by zero exception occurred")
-        raise CustomException(e, sys)
+#     try:
+#         a = 1 / 0
+#     except Exception as e:
+#         logging.info("Divide by zero exception occurred")
+#         raise CustomException(e, sys)
