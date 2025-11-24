@@ -63,6 +63,7 @@ class DataTransformation:
             logging.info("Read train and test data completed")
             
             logging.info("Obtaining preprocessor object")
+            
             preprocessor_obj = self.get_data_transformer_object()
             
             target_column_name = 'math_score'
@@ -75,10 +76,26 @@ class DataTransformation:
             target_feature_test_df = test_df[target_column_name]
             
             
-            logging.info(f"Train dataframe head : \n{train_df.head().to_string()}")
-            logging.info(f"Test dataframe head : \n{test_df.head().to_string()}")
+            # logging.info(f"Train dataframe head : \n{train_df.head().to_string()}")
+            # logging.info(f"Test dataframe head : \n{test_df.head().to_string()}")
             
+            logging.info("Applying preprocessing object on training and testing dataframe")
+
+            input_feature_train_df_arr = preprocessor_obj.fit_transform(input_feature_train_df) # fit_transform on train returns numpy array
+            input_feature_test_df_arr = preprocessor_obj.transform(input_feature_test_df) # transform on test returns numpy array
             
+            train_arr = np.c_[input_feature_train_df_arr, np.array(target_feature_train_df)]
+            test_arr = np.c_[input_feature_test_df_arr, np.array(target_feature_test_df)]
             
+
+            logging.info("Applying preprocessing object on training and testing dataframe completed")
+            
+            save_object(
+                file_path=self.data_transformation_config.preprocessor_obj_file_path,
+                obj=preprocessor_obj
+            )
+
+            return train_arr, test_arr, self.data_transformation_config.preprocessor_obj_file_path
+
         except Exception as e:
             raise CustomException(e, sys)
