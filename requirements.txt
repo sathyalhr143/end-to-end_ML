@@ -8,6 +8,12 @@ catboost
 xgboost
 dill
 setuptools
+flask
+fastapi[all]
+uvicorn[standard]   
+pydantic
+streamlit
+watchdog
 # ipwidgets
 #pytorch
 -e .
