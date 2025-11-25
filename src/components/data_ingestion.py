@@ -8,6 +8,8 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
 import numpy as np
+
+from src.components.model_trainer import ModelTrainer, ModelTrainerConfig
 # from utils import save_object
 
 @dataclass
@@ -20,11 +22,11 @@ class DataIngestion:
     def __init__(self):
         self.ingestion_config = DataIngestionConfig()
         
-    def initiate_data_ingestion(self):
+    def initiate_data_ingestion(self, path='notebook/data/student.csv'):
         logging.info("Data Ingestion started")
         try:
             #Read the Dataset form local storage
-            df = pd.read_csv('notebook/data/student.csv')
+            df = pd.read_csv(path)
             logging.info("Dataset read as dataframe")
             
             os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path), exist_ok=True)
