@@ -102,13 +102,22 @@ if submit_button:
         predict_pipeline = PredictPipeline()
         prediction = predict_pipeline.predict_pipe(pred_df)
         
+        
         st.success(f"The predicted math score is: {prediction[0]:.2f}")
         
         # Celebrate if the predicted score is high
         if prediction[0] >= 80:
+            st.write(f"🎉 Excellent performance predicted as {prediction[0]}! Keep it up! You are doing great 🎉")
             st.balloons()
             
+        elif prediction[0] < 40:
+            st.write(f"📚 Don't be discouraged by a predicted score of {prediction[0]:.2f}. \n \
+                With dedication and hard work, you can improve your math skills! Keep pushing forward! 📚")
             
+        else:
+            st.write(f"👍 A predicted score of {prediction[0]:.2f} shows you're on the right track. \n \
+                Keep practicing and striving for excellence! You've got this! 👍")
+            st.snow()
     except Exception as e:
         
         st.error(f"Error in input data: {e}")
