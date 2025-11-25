@@ -6,6 +6,8 @@ seaborn
 ipython
 catboost
 xgboost
+dill
+setuptools
 # ipwidgets
 #pytorch
-# -e .
+-e .

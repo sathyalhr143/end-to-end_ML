@@ -9,6 +9,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
+from src.utils import save_object
 
 @dataclass
 class DataTransformationConfig:
@@ -24,7 +25,7 @@ class DataTransformation:
         try:
             numerical_columns = ['writing_score', 'reading_score']
             categorical_columns = ['gender', 'race_ethnicity', 'parental_level_of_education', 'lunch',
-    'test_preparation_course', 'reading_score', 'writing_score']
+    'test_preparation_course']
             num_pipeline = Pipeline(
                 steps=[
                     ("imputer",SimpleImputer(strategy='median')),
@@ -35,7 +36,7 @@ class DataTransformation:
             cat_pipeline = Pipeline(
                 steps=[
                     ("imputer",SimpleImputer(strategy='most_frequent')),
-                    ('one_hot_encoder', OneHotEncoder()),
+                    ('one_hot_encoder', OneHotEncoder(sparse_output=False)),
                     ('scaler', StandardScaler(with_mean=False))
                 ]
             )
@@ -74,6 +75,12 @@ class DataTransformation:
             
             input_feature_test_df = test_df.drop(columns=[target_column_name], axis=1)
             target_feature_test_df = test_df[target_column_name]
+            
+            logging.info(f"Size of training input features : {input_feature_train_df.shape}")
+            logging.info(f"Size of testing input features : {input_feature_test_df.shape}") 
+            
+            logging.info(f"Size of training target features : {target_feature_train_df.shape}") 
+            logging.info(f"Size of testing target features : {target_feature_test_df.shape}")
             
             
             # logging.info(f"Train dataframe head : \n{train_df.head().to_string()}")
