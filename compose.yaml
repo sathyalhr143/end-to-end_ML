@@ -1,0 +1,21 @@
+version: '3.13'
+
+services:
+  ml-app:
+    # Build the image from the Dockerfile in the current directory (.)
+    build: . 
+    
+    # Name the container so it's easy to find later
+    container_name: ml_app_container
+    
+    # Map port 8501 (Host) to 8501 (Container)
+    # If your app uses a different port, change the right side number.
+    ports:
+      - "8000:8000"
+    
+    # Automatically restart if the app crashes or the server reboots
+    restart: unless-stopped
+    
+    # OPTIONAL: Mount your code so you can edit app.py without rebuilding
+    # volumes:
+    #   - ./app.py:/app/app.py
