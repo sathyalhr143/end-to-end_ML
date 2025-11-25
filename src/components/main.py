@@ -15,8 +15,8 @@ def main():
     train_arr, test_arr, _ = data_transformation.initiate_data_transformation(train_path, test_path)
     
     model_trainer = ModelTrainer()
-    r2_score = model_trainer.initiate_model_trainer(train_arr, test_arr)
-    print(f"R2 Score: {r2_score}")
+    model_name, model, r2_score, model_params = model_trainer.initiate_model_trainer(train_arr, test_arr)
+    print(f"Best Model: {model_name} with a R2 Score: {r2_score} and Parameters: {model_params}")
     
 if __name__== "__main__":
     try: 
